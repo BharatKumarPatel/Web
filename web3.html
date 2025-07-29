@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Halcyon House - The Art of Modern Menswear</title>
+    
+    <style>
+        /* --- Google Fonts Import --- */
+        @import url('https://fonts.googleapis.com/css2?family=Prata&family=Inter:wght@300;400;500;700&display=swap');
+
+        /* --- Global Styles & Variables --- */
+        :root {
+            --bg-color: #121212; /* Deep Charcoal Black */
+            --primary-text: #F5F5F5; /* Soft Off-White */
+            --secondary-text: #A8A8A8;
+            --accent-color: #BDB7AB; /* Muted, sophisticated gold/bronze */
+            --border-color: #333333;
+            --font-headings: 'Prata', serif;
+            --font-body: 'Inter', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--primary-text);
+            background-color: var(--bg-color);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: var(--font-headings);
+            font-weight: 400;
+            color: var(--primary-text);
+        }
+        
+        a {
+            text-decoration: none;
+            color: var(--primary-text);
+            transition: color 0.3s ease;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+        
+        /* --- Header --- */
+        .main-header {
+            background: rgba(18, 18, 18, 0.7);
+            backdrop-filter: blur(12px);
+            padding: 25px 0;
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-family: var(--font-headings);
+            font-size: 1.8rem;
+            letter-spacing: 1px;
+        }
+
+        .main-nav ul {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+        }
+        
+        .main-nav a {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            padding-bottom: 8px;
+            position: relative;
+        }
+        
+        .main-nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--accent-color);
+            transition: width 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .main-nav a:hover::after {
+            width: 100%;
+        }
+
+        .header-icons {
+            display: flex;
+            gap: 25px;
+        }
+
+        .header-icons a {
+            font-size: 1.3rem;
+        }
+        
+        .menu-toggle {
+            display: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        /* --- Hero Section --- */
+        .hero-section {
+            height: 95vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://picsum.photos/1920/1200?random=31&grayscale') no-repeat center center/cover;
+            color: white;
+            padding: 0 20px;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            animation: fadeIn 2s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .hero-content h1 {
+            font-size: 5rem;
+            color: white;
+            margin-bottom: 1rem;
+            line-height: 1.1;
+        }
+
+        .hero-content p {
+            font-size: 1.1rem;
+            font-weight: 300;
+            color: var(--secondary-text);
+            margin-bottom: 2.5rem;
+            max-width: 550px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-button {
+            background: transparent;
+            color: white;
+            padding: 18px 50px;
+            font-size: 1rem;
+            font-weight: 500;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            border: 1px solid white;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+        
+        .cta-button:hover {
+            background: white;
+            color: var(--bg-color);
+        }
+
+        /* --- Featured Collections Section --- */
+        .featured-collections {
+            padding: 120px 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 80px;
+        }
+
+        .collection-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+        }
+
+        .collection-card {
+            position: relative;
+            overflow: hidden;
+            height: 600px;
+        }
+        
+        .collection-card.full-width {
+            grid-column: 1 / -1; /* Span across both columns */
+        }
+
+        .collection-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+        
+        .collection-card:hover img {
+            transform: scale(1.03);
+        }
+
+        .collection-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 40px;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            color: white;
+        }
+
+        .collection-info h3 {
+            font-size: 2.5rem;
+            color: white;
+            margin-bottom: 10px;
+        }
+
+        .collection-info a {
+            color: white;
+            font-weight: 500;
+            letter-spacing: 1px;
+            border-bottom: 1px solid var(--accent-color);
+            padding-bottom: 3px;
+        }
+        
+        /* --- Bestsellers Section --- */
+        .bestsellers {
+            padding: 100px 0;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .product-card {
+            background: transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-image-wrapper {
+            height: 480px;
+        }
+
+        .product-image-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .product-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px;
+            text-align: center;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            transform: translateY(100%);
+            opacity: 0;
+            transition: transform 0.4s ease, opacity 0.4s ease;
+        }
+
+        .product-card:hover .product-info {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        .product-card:hover .product-image-wrapper img {
+            transform: scale(1.05);
+        }
+
+        .product-info h3 {
+            font-size: 1.3rem;
+            font-weight: 400;
+            color: white;
+            margin-bottom: 5px;
+        }
+
+        .product-price {
+            font-size: 1rem;
+            color: var(--accent-color);
+            font-weight: 400;
+        }
+
+        /* --- Footer --- */
+        .main-footer {
+            padding: 80px 0 40px;
+            border-top: 1px solid var(--border-color);
+            margin-top: 80px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+
+        .footer-column h4 {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column li {
+            margin-bottom: 12px;
+        }
+
+        .footer-column a {
+            color: var(--secondary-text);
+        }
+        
+        .footer-column a:hover {
+            color: var(--primary-text);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 40px;
+            border-top: 1px solid var(--border-color);
+            font-size: 0.9rem;
+            color: var(--secondary-text);
+        }
+
+        /* --- Mobile Navigation --- */
+        .mobile-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: var(--bg-color);
+            z-index: 999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transform: translateX(100%);
+            transition: transform 0.5s cubic-bezier(0.86, 0, 0.07, 1);
+        }
+        
+        .mobile-nav.active {
+            transform: translateX(0);
+        }
+        
+        .mobile-nav ul {
+            list-style: none;
+            text-align: center;
+        }
+
+        .mobile-nav li {
+            margin: 25px 0;
+        }
+        
+        .mobile-nav a {
+            font-size: 2rem;
+            font-family: var(--font-headings);
+        }
+
+        /* --- Responsive Design --- */
+        @media (max-width: 1024px) {
+            .container {
+                padding: 0 20px;
+            }
+            .main-nav {
+                display: none;
+            }
+            .header-icons {
+                display: none;
+            }
+            .menu-toggle {
+                display: block;
+            }
+            .hero-content h1 {
+                font-size: 3.5rem;
+            }
+            .collection-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-content h1 {
+                font-size: 2.8rem;
+            }
+            .hero-content p {
+                font-size: 1rem;
+            }
+            .section-title {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+    <!-- Icon Library: Boxicons -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+
+    <!-- ==================== HEADER ==================== -->
+    <header class="main-header">
+        <div class="container header-container">
+            <a href="#" class="logo">Halcyon House</a>
+            
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="#collections">Collections</a></li>
+                    <li><a href="#shop">New In</a></li>
+                    <li><a href="#">The Journal</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-icons">
+                <a href="#"><i class='bx bx-search'></i></a>
+                <a href="#"><i class='bx bx-user'></i></a>
+                <a href="#"><i class='bx bx-shopping-bag'></i></a>
+            </div>
+
+            <div class="menu-toggle">
+                <i class='bx bx-menu'></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- ==================== MOBILE NAVIGATION ==================== -->
+    <nav class="mobile-nav">
+        <ul>
+            <li><a href="#collections">Collections</a></li>
+            <li><a href="#shop">New In</a></li>
+            <li><a href="#">The Journal</a></li>
+            <li><a href="#">Account</a></li>
+        </ul>
+    </nav>
+
+
+    <main>
+        <!-- ==================== HERO SECTION ==================== -->
+        <section class="hero-section">
+            <div class="hero-content">
+                <h1>Defined by Detail</h1>
+                <p>An exploration of silhouette, fabric, and purpose. Curated menswear for the modern individual.</p>
+                <a href="#collections" class="cta-button">Explore The Collection</a>
+            </div>
+        </section>
+
+        <!-- ==================== FEATURED COLLECTIONS ==================== -->
+        <section id="collections" class="featured-collections">
+            <div class="container">
+                <h2 class="section-title">Curated Collections</h2>
+                <div class="collection-grid">
+                    <div class="collection-card">
+                        <img src="https://picsum.photos/800/1200?random=45&grayscale" alt="Man in a tailored suit">
+                        <div class="collection-info">
+                            <h3>The Suiting Collection</h3>
+                            <a href="#">Discover Now</a>
+                        </div>
+                    </div>
+                    <div class="collection-card">
+                        <img src="https://picsum.photos/800/1200?random=46" alt="Man wearing luxury knitwear">
+                        <div class="collection-info">
+                            <h3>The Cashmere Edit</h3>
+                            <a href="#">Shop The Edit</a>
+                        </div>
+                    </div>
+                    <div class="collection-card full-width">
+                        <img src="https://picsum.photos/1600/1000?random=47" alt="Man in casual, stylish outerwear">
+                        <div class="collection-info">
+                            <h3>Weekend Essentials</h3>
+                            <a href="#">View All</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== BESTSELLERS SECTION ==================== -->
+        <section id="shop" class="bestsellers">
+            <div class="container">
+                <h2 class="section-title">New Arrivals</h2>
+                <div class="product-grid">
+
+                    <!-- Product 1 -->
+                    <article class="product-card">
+                        <div class="product-image-wrapper">
+                            <img src="images/product1.jpg" alt="Men's Wool Overcoat">
+                        </div>
+                        <div class="product-info">
+                            <h3>Wool & Cashmere Overcoat</h3>
+                            <div class="product-price">₹45,999</div>
+                        </div>
+                    </article>
+
+                    <!-- Product 2 -->
+                    <article class="product-card">
+                        <div class="product-image-wrapper">
+                            <img src="https://picsum.photos/500/700?random=52" alt="Men's Selvedge Denim Jeans">
+                        </div>
+                        <div class="product-info">
+                            <h3>Japanese Selvedge Denim</h3>
+                            <div class="product-price">₹18,500</div>
+                        </div>
+                    </article>
+                    
+                    <!-- Product 3 -->
+                    <article class="product-card">
+                        <div class="product-image-wrapper">
+                            <img src="https://picsum.photos/500/700?random=53&grayscale" alt="Men's Leather Loafers">
+                        </div>
+                         <div class="product-info">
+                            <h3>Hand-Stitched Leather Loafer</h3>
+                            <div class="product-price">₹22,000</div>
+                        </div>
+                    </article>
+
+                    <!-- Product 4 -->
+                    <article class="product-card">
+                        <div class="product-image-wrapper">
+                            <img src="https://picsum.photos/500/700?random=54" alt="Men's Silk-Cotton Polo">
+                        </div>
+                        <div class="product-info">
+                            <h3>Silk-Cotton Knit Polo</h3>
+                            <div class="product-price">₹12,999</div>
+                        </div>
+                    </article>
+
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-column">
+                    <h4>Customer Care</h4>
+                    <ul>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Shipping</a></li>
+                        <li><a href="#">Returns</a></li>
+                    </ul>
+                </div>
+                 <div class="footer-column">
+                    <h4>About Halcyon</h4>
+                    <ul>
+                        <li><a href="#">Our Philosophy</a></li>
+                        <li><a href="#">Craftsmanship</a></li>
+                        <li><a href="#">Careers</a></li>
+                    </ul>
+                </div>
+                 <div class="footer-column">
+                    <h4>Follow Us</h4>
+                    <ul>
+                        <li><a href="#">Instagram</a></li>
+                        <li><a href="#">Facebook</a></li>
+                        <li><a href="#">Twitter</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h4>Newsletter</h4>
+                    <p style="color: var(--secondary-text); margin-bottom: 15px;">Join our mailing list for exclusive updates.</p>
+                    <!-- Newsletter form can be added here -->
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Halcyon House. A pursuit of modern elegance.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        const menuToggle = document.querySelector('.menu-toggle');
+        const mobileNav = document.querySelector('.mobile-nav');
+        const mobileNavLinks = document.querySelectorAll('.mobile-nav a');
+
+        menuToggle.addEventListener('click', () => {
+            mobileNav.classList.toggle('active');
+            // Toggle icon between menu and close
+            const icon = menuToggle.querySelector('i');
+            if (icon.classList.contains('bx-menu')) {
+                icon.classList.remove('bx-menu');
+                icon.classList.add('bx-x');
+            } else {
+                icon.classList.remove('bx-x');
+                icon.classList.add('bx-menu');
+            }
+        });
+        
+        // Close menu when a link is clicked
+        mobileNavLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileNav.classList.remove('active');
+                menuToggle.querySelector('i').classList.remove('bx-x');
+                menuToggle.querySelector('i').classList.add('bx-menu');
+            });
+        });
+    </script>
+
+</body>
+</html>
